@@ -2,6 +2,7 @@
   "version": "0.1",
   "name": "foxnes",
   "description": "a nes emulator based on jsnes",
+  "type" : "privileged",
   "launch_path": "/index.html",
   "icons": {
     "16": "/images/icon16.png",
@@ -12,6 +13,12 @@
   "developer": {
     "name": "Carlos G. Sanchez",
     "url": "elsimpicuitico.wordpress.com"
+  },
+  "permissions": {
+    "device-storage:sdcard": {
+      "description" : "Para elegir una rom de la SDCARD",
+      "access": "readonly"
+    }
   },
    "installs_allowed_from": ["*"],
    "default_locale": "en"

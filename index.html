@@ -5,8 +5,9 @@
 </head>
 <body>
     <div id="emulator"></div>
-    <script src="js/jquery-1.4.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/dynamicaudio-min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/hola.js" type="text/javascript" charset="utf-8"></script>
     <script src="source/nes.js" type="text/javascript" charset="utf-8"></script>
     <script src="source/utils.js" type="text/javascript" charset="utf-8"></script>
     <script src="source/cpu.js" type="text/javascript" charset="utf-8"></script>
@@ -16,19 +17,5 @@
     <script src="source/ppu.js" type="text/javascript" charset="utf-8"></script>
     <script src="source/rom.js" type="text/javascript" charset="utf-8"></script>
     <script src="source/ui.js" type="text/javascript" charset="utf-8"></script>
-    <script type="text/javascript" charset="utf-8">
-        var nes;
-        $(function() {
-            nes = new JSNES({
-                'ui': $('#emulator').JSNESUI({
-                    "Working": [
-                        ['Contra', 'roms/contra.nes'],
-                        ['Mario Bros.', 'roms/mario.nes'],
-                        ['Punch Out.', 'roms/PunchOut.nes'],
-                    ]
-                })
-            });
-        });
-    </script>
     </body>
 </html>

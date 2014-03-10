@@ -181,7 +181,7 @@ if (typeof jQuery !== 'undefined') {
                     var self = this;
                     self.updateStatus("Downloading...");
                     $.ajax({
-                        url: escape(self.romSelect.val()),
+                        url: self.romSelect.val(),
                         xhr: function() {
                             var xhr = $.ajaxSettings.xhr();
                             if (typeof xhr.overrideMimeType !== 'undefined') {
@@ -265,11 +265,37 @@ if (typeof jQuery !== 'undefined') {
                         if (roms.hasOwnProperty(groupName)) {
                             var optgroup = $('<optgroup></optgroup>').
                                 attr("label", groupName);
-                            for (var i = 0; i < roms[groupName].length; i++) {
+                            
+                            /*for (var i = 0; i < roms[groupName].length; i++) {
                                 $('<option>'+roms[groupName][i][0]+'</option>')
                                     .attr("value", roms[groupName][i][1])
                                     .appendTo(optgroup);
+                            }*/
+                            var storage = navigator.getDeviceStorage("sdcard");
+                            var all_files = storage.enumerate("");
+                            all_files.onsuccess = function() {
+                                while (all_files.result) {
+                                  var each_file = all_files.result;
+                                  if (each_file.name.match(/.nes$/)) {
+                                    var reader  = new FileReader();
+                                    reader.onload = function () {
+                                        var url = reader.result;
+                                        var ultimo = each_file.name.split("/").pop();
+                                        var pdf = ultimo.charAt(0).toUpperCase() + ultimo.slice(1);
+                                        $('<option>'+pdf+'</option>').attr("value", url).appendTo(optgroup);
+                                    }
+                                    if (each_file) {
+                                       reader.readAsDataURL(each_file);
+                                    }
+                                  }
+                                  all_files.continue();
+                                }
+                            };
+
+                            all_files.onerror = function(){
+                                console.log("error al leer archivos");
                             }
+
                             this.romSelect.append(optgroup);
                         }
                     }
